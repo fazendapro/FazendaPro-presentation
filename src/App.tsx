@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import { Layout, Button, Switch, Typography, Space, Card, Divider } from 'antd';
+import { BulbOutlined, BulbFilled } from '@ant-design/icons';
+import { useTheme } from './styles/index';
 
-function App() {
-  const [count, setCount] = useState(0)
+const { Header, Content, Footer } = Layout;
+const { Title, Paragraph, Text } = Typography;
+
+export const App = () => {
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Layout style={{ minHeight: '100vh' }}>
+      <Header style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        padding: '0 20px',
+        backgroundColor: isDarkMode ? '#141414' : '#f0f2f5',
+      }}>
+        <Title level={4} style={{ color: isDarkMode ? '#fff' : '#000', margin: 0 }}>
+          FarmPro - Soluções em Agro
+        </Title>
+        <Space>
+          <Text style={{ color: isDarkMode ? '#fff' : '#000' }}>
+            {isDarkMode ? 'Modo Escuro' : 'Modo Claro'}
+          </Text>
+          <Switch
+            checked={isDarkMode}
+            onChange={toggleTheme}
+            checkedChildren={<BulbFilled />}
+            unCheckedChildren={<BulbOutlined />}
+          />
+        </Space>
+      </Header>
+      <Content style={{ padding: '50px', backgroundColor: isDarkMode ? '#141414' : '#f0f2f5' }}>
+        <Card>
+          <Title level={2}>Configuração do Tema</Title>
+          <Paragraph>
+            Este é o tema padrão do projeto FarmPro.
+          </Paragraph>
+          <Divider />
+          <Space direction="vertical" size="large">
+            <Card title="Demonstração de componentes">
+              <Space wrap>
+                <Button type="primary">Botão Primário</Button>
+                <Button>Botão Padrão</Button>
+                <Button type="dashed">Botão Tracejado</Button>
+                <Button type="text">Botão Texto</Button>
+                <Button type="link">Botão Link</Button>
+              </Space>
+            </Card>
 
-export default App
+            <Button
+              type="primary"
+              size="large"
+              onClick={toggleTheme}
+              icon={isDarkMode ? <BulbFilled /> : <BulbOutlined />}
+            >
+              Alternar para {isDarkMode ? 'Modo Claro' : 'Modo Escuro'}
+            </Button>
+          </Space>
+        </Card>
+      </Content>
+
+      <Footer style={{ textAlign: 'center', backgroundColor: isDarkMode ? '#000' : '#f0f2f5' }}>
+        <Text style={{ color: isDarkMode ? '#999' : '#666' }}>
+          FarmPro - Soluções em Agro ©{new Date().getFullYear()}
+        </Text>
+      </Footer>
+    </Layout>
+  );
+};
