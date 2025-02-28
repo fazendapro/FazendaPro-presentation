@@ -10,6 +10,11 @@ export const App = () => {
   const { isDarkMode, toggleTheme } = useTheme();
   const { t } = useTranslation();
 
+  const fixedColorCard = {
+    backgroundColor: isDarkMode ? '#141414' : '#f0f2f5',
+    color: isDarkMode ? '#fff' : '#000',
+  };
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{
@@ -17,13 +22,13 @@ export const App = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 20px',
-        backgroundColor: isDarkMode ? '#141414' : '#f0f2f5',
+        backgroundColor: fixedColorCard.backgroundColor,
       }}>
-        <Title level={4} style={{ color: isDarkMode ? '#fff' : '#000', margin: 0 }}>
+        <Title level={4} style={{ color: fixedColorCard.color, margin: 0 }}>
           {t('home.welcome')}
         </Title>
         <Space>
-          <Text style={{ color: isDarkMode ? '#fff' : '#000' }}>
+          <Text style={{ color: fixedColorCard.color }}>
             {isDarkMode ? 'Modo Escuro' : 'Modo Claro'}
           </Text>
           <Switch
@@ -34,7 +39,7 @@ export const App = () => {
           />
         </Space>
       </Header>
-      <Content style={{ padding: '50px', backgroundColor: isDarkMode ? '#141414' : '#f0f2f5' }}>
+      <Content style={{ padding: '50px', backgroundColor: fixedColorCard.backgroundColor }}>
         <Card>
           <Title level={2}>Configuração do Tema</Title>
           <Paragraph>
@@ -64,8 +69,8 @@ export const App = () => {
         </Card>
       </Content>
 
-      <Footer style={{ textAlign: 'center', backgroundColor: isDarkMode ? '#000' : '#f0f2f5' }}>
-        <Text style={{ color: isDarkMode ? '#999' : '#666' }}>
+      <Footer style={{ textAlign: 'center', backgroundColor: fixedColorCard.backgroundColor }}>
+        <Text style={{ color: fixedColorCard.color }}>
           FarmPro - Soluções em Agro ©{new Date().getFullYear()}
         </Text>
       </Footer>
