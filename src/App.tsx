@@ -1,25 +1,26 @@
-// src/App.tsx
 import { Layout, Button, Switch, Typography, Space, Card, Divider } from 'antd';
 import { BulbOutlined, BulbFilled } from '@ant-design/icons';
 import { useTheme } from './styles/index';
+import { useTranslation } from 'react-i18next';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph, Text } = Typography;
 
 export const App = () => {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Header style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
+      <Header style={{
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 20px',
         backgroundColor: isDarkMode ? '#141414' : '#f0f2f5',
       }}>
         <Title level={4} style={{ color: isDarkMode ? '#fff' : '#000', margin: 0 }}>
-          FarmPro - Soluções em Agro
+          {t('home.welcome')}
         </Title>
         <Space>
           <Text style={{ color: isDarkMode ? '#fff' : '#000' }}>
@@ -37,7 +38,7 @@ export const App = () => {
         <Card>
           <Title level={2}>Configuração do Tema</Title>
           <Paragraph>
-            Este é o tema padrão do projeto FarmPro.
+            {t('home.headerTitle')}
           </Paragraph>
           <Divider />
           <Space direction="vertical" size="large">
